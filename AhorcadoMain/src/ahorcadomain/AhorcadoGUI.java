@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 public class AhorcadoGUI extends BaseFrame {
 
     public AhorcadoGUI() {
-        super("Crear Evento", 940, 760);
+        super("Ahorcado", 940, 760);
     }
 
     @Override
@@ -50,11 +50,11 @@ public class AhorcadoGUI extends BaseFrame {
         JLabel lblTipo = crearLabel("Modo de juego: ", 540, 20, 230, 25, Font.BOLD, 18f);
         panelCentro.add(lblTipo);
         
-        JTextField txtCaracter = crearTextField(420, 420, 80, 45);
+        JTextField txtCaracter = crearTextField(660, 350, 80, 45);
         txtCaracter.setHorizontalAlignment(JTextField.CENTER);
         panelCentro.add(txtCaracter);
         
-        JButton btnAdivinar = crearBoton("Adivinar", 410, 490, 100, 40);
+        JButton btnAdivinar = crearBoton("Adivinar", 650, 410, 100, 40);
         panelCentro.add(btnAdivinar);
 
         String tipo[] = {"Base", "Azar"};
