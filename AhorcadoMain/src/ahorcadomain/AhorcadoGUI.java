@@ -66,14 +66,34 @@ public class AhorcadoGUI extends BaseFrame {
         panelCentro.add(btnSalir);
 
         JLabel lblBase = new JLabel();
-        lblBase.setBounds(0, 500, 500, 45);
+        lblBase.setBounds(0, 450, 410, 45);
         lblBase.setIcon(new ImageIcon(getClass().getResource("/Imagenes/base.png")));
         panelCentro.add(lblBase);
 
+        JLabel lblConector = new JLabel();
+        lblConector.setBounds(85, -60, 500, 380);
+        lblConector.setIcon(new ImageIcon(getClass().getResource("/Imagenes/conector.png")));
+        panelCentro.add(lblConector);
+
+        JLabel lblCabeza = new JLabel();
+        lblCabeza.setBounds(290, 0, 500, 380);
+        lblCabeza.setIcon(new ImageIcon(getClass().getResource("/Imagenes/cabeza2.png")));
+        panelCentro.add(lblCabeza);
+
+        JLabel lblBrazos = new JLabel();
+        lblBrazos.setBounds(290, 50, 500, 380);
+        lblBrazos.setIcon(new ImageIcon(getClass().getResource("/Imagenes/brazos2.png")));
+        panelCentro.add(lblBrazos);
+
+        JLabel lblPiernas = new JLabel();
+        lblPiernas.setBounds(290, 100, 500, 380);
+        lblPiernas.setIcon(new ImageIcon(getClass().getResource("/Imagenes/piernas2.png")));
+        panelCentro.add(lblPiernas);
+
         JLabel lblPalo = new JLabel();
-        lblPalo.setBounds(0, 500, 450, 45);
+        lblPalo.setBounds(65, 110, 500, 380);
         lblPalo.setIcon(new ImageIcon(getClass().getResource("/Imagenes/palo.png")));
-        panelCentro.add(lblBase);
+        panelCentro.add(lblPalo);
 
         setContentPane(panelPrincipal);
     }
