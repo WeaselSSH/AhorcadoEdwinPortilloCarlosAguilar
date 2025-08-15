@@ -49,11 +49,11 @@ public class AhorcadoGUI extends BaseFrame {
 
         JLabel lblTipo = crearLabel("Modo de juego: ", 540, 20, 230, 25, Font.BOLD, 18f);
         panelCentro.add(lblTipo);
-        
+
         JTextField txtCaracter = crearTextField(660, 350, 80, 45);
         txtCaracter.setHorizontalAlignment(JTextField.CENTER);
         panelCentro.add(txtCaracter);
-        
+
         JButton btnAdivinar = crearBoton("Adivinar", 650, 410, 100, 40);
         panelCentro.add(btnAdivinar);
 
@@ -64,6 +64,16 @@ public class AhorcadoGUI extends BaseFrame {
 
         JButton btnSalir = crearBoton("Salir", 740, 580, 150, 45);
         panelCentro.add(btnSalir);
+
+        JLabel lblBase = new JLabel();
+        lblBase.setBounds(0, 500, 500, 45);
+        lblBase.setIcon(new ImageIcon(getClass().getResource("/Imagenes/base.png")));
+        panelCentro.add(lblBase);
+
+        JLabel lblPalo = new JLabel();
+        lblPalo.setBounds(0, 500, 450, 45);
+        lblPalo.setIcon(new ImageIcon(getClass().getResource("/Imagenes/palo.png")));
+        panelCentro.add(lblBase);
 
         setContentPane(panelPrincipal);
     }
