@@ -1,14 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ahorcadomain;
-import java.util.ArrayList;
 
-/**
- *
- * @author adrianaguilar
- */
+import java.util.ArrayList;
 
 public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
 
@@ -16,40 +8,79 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
     protected char[] palabraActual;
     protected int intentos;
     protected int limiteIntentos = 6;
+
     protected ArrayList<Character> letrasUsadas = new ArrayList<>();
-    protected ArrayList<String> figuraAhorcado = new ArrayList<>();
+    protected ArrayList<Character> letrasAdivinadas = new ArrayList<>();
+    protected ArrayList<Character> letrasErradas = new ArrayList<>();
+    protected final ArrayList<String> figuraAhorcado = new ArrayList<>();
 
-    public int getIntentosRestantes() { 
-        return intentos; 
+    protected void initFiguraAhorcado() {
+        figuraAhorcado.clear();
+        figuraAhorcado.add("cabeza");
+        figuraAhorcado.add("torso");
+        figuraAhorcado.add("brazo_izq");
+        figuraAhorcado.add("brazo_der");
+        figuraAhorcado.add("pierna_izq");
+        figuraAhorcado.add("pierna_der");
     }
 
-    public int getLimiteIntentos() { 
-        return limiteIntentos; 
+    public ArrayList<String> getFiguraAhorcado() {
+        return new ArrayList<>(figuraAhorcado);
     }
 
-    public ArrayList<Character> getLetrasUsadas() { 
-        return letrasUsadas; 
+    public int getIntentosRestantes() {
+        return intentos;
     }
 
-    protected String getPalabraSecreta() { 
-        return palabraSecreta; 
+    public int getLimiteIntentos() {
+        return limiteIntentos;
     }
 
-    public boolean intentarConLetra(char letra) {
+    public int getErrores() {
+        return limiteIntentos - intentos;
+    }
+
+    public ArrayList<Character> getLetrasUsadas() {
+        return new ArrayList<>(letrasUsadas);
+    }
+
+    public ArrayList<Character> getLetrasAdivinadas() {
+        return new ArrayList<>(letrasAdivinadas);
+    }
+
+    public ArrayList<Character> getLetrasErradas() {
+        return new ArrayList<>(letrasErradas);
+    }
+
+    protected String getPalabraSecreta() {
+        return palabraSecreta;
+    }
+
+    public ResultadoIntento intentarConLetra(char letra) {
         char l = Character.toLowerCase(letra);
 
-        if (!Character.isLetter(l)) return false;
-        if (letrasUsadas.contains(l)) return false; 
+        if (!Character.isLetter(l)) {
+            return ResultadoIntento.INVALIDA;
+        }
+        if (letrasUsadas.contains(l)) {
+            return ResultadoIntento.REPETIDA;
+        }
 
         letrasUsadas.add(l);
 
-        boolean acierto = verificarLetra(l);
-        if (acierto) {
+        if (verificarLetra(l)) {
             actualizarPalabraActual(l);
+            if (!letrasAdivinadas.contains(l)) {
+                letrasAdivinadas.add(l);
+            }
+            return ResultadoIntento.ACIERTO;
         } else {
+            if (!letrasErradas.contains(l)) {
+                letrasErradas.add(l);
+            }
             intentos = Math.max(0, intentos - 1);
+            return ResultadoIntento.ERROR;
         }
-        return acierto;
     }
 
     public boolean juegoTerminado() {
@@ -60,19 +91,22 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < palabraActual.length; i++) {
             sb.append(palabraActual[i]);
-            if (i < palabraActual.length - 1) sb.append(' ');
+            if (i < palabraActual.length - 1) {
+                sb.append(' ');
+            }
         }
         return sb.toString();
     }
 
-    public String getFigura() {
-        int errores = limiteIntentos - intentos;
-        int idx = Math.min(errores, figuraAhorcado.size() - 1);
-        return figuraAhorcado.isEmpty() ? "" : figuraAhorcado.get(idx);
+    protected abstract void actualizarPalabraActual(char letra);
+
+    protected abstract boolean verificarLetra(char letra);
+
+    public abstract boolean hasGanado();
+
+    @Override
+    public void jugar() {
+        inicializarPalabraSecreta();
     }
 
-    protected abstract void actualizarPalabraActual(char letra);
-    protected abstract boolean verificarLetra(char letra);
-    public abstract boolean hasGanado();
 }
-

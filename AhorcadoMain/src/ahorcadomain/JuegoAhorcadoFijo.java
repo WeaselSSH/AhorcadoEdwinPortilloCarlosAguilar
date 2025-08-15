@@ -1,25 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ahorcadomain;
-
-/**
- *
- * @author adrianaguilar
- */
 
 import java.util.Arrays;
 
 public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
 
     private final String palabraFija;
- 
+
     public JuegoAhorcadoFijo(String palabraFija) {
+        if (palabraFija == null || palabraFija.isBlank()) {
+            throw new IllegalArgumentException("La palabra fija no puede ser vacía.");
+        }
         this.palabraFija = palabraFija;
     }
 
     public JuegoAhorcadoFijo(String palabraFija, int limiteIntentos) {
+        if (palabraFija == null || palabraFija.isBlank()) {
+            throw new IllegalArgumentException("La palabra fija no puede ser vacía.");
+        }
         this.palabraFija = palabraFija;
         this.limiteIntentos = Math.max(1, limiteIntentos);
     }
@@ -27,11 +24,14 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
     @Override
     public void inicializarPalabraSecreta() {
         this.palabraSecreta = palabraFija.toLowerCase();
+
         this.intentos = limiteIntentos;
         this.letrasUsadas.clear();
+        this.letrasAdivinadas.clear();
+        this.letrasErradas.clear();
+
         this.palabraActual = new char[palabraSecreta.length()];
         Arrays.fill(this.palabraActual, '_');
-      
     }
 
     @Override
@@ -55,12 +55,9 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
 
     @Override
     public void jugar() {
-        
     }
 
-   
     public String revelarPalabra() {
         return palabraSecreta;
     }
 }
-

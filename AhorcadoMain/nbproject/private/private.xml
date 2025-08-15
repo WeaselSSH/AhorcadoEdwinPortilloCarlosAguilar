@@ -3,7 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Public/AhorcadoEdwin_PAdrian_A/AhorcadoEdwinPortilloCarlosAguilar/AhorcadoMain/src/ahorcadomain/AhorcadoGUI.java</file>
+            <file>file:/C:/Users/Public/AhorcadoEdwin_PAdrian_A/AhorcadoEdwinPortilloCarlosAguilar/AhorcadoMain/src/ahorcadomain/JuegoAhorcadoAzar.java</file>
+            <file>file:/C:/Users/Public/AhorcadoEdwin_PAdrian_A/AhorcadoEdwinPortilloCarlosAguilar/AhorcadoMain/src/ahorcadomain/JuegoAhorcadoBase.java</file>
+            <file>file:/C:/Users/Public/AhorcadoEdwin_PAdrian_A/AhorcadoEdwinPortilloCarlosAguilar/AhorcadoMain/src/ahorcadomain/JuegoAhorcadoFijo.java</file>
         </group>
     </open-files>
 </project-private>
