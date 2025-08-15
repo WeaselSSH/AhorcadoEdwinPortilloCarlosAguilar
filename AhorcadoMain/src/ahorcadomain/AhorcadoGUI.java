@@ -11,7 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import static javax.swing.SwingConstants.CENTER;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class AhorcadoGUI extends BaseFrame {
 
@@ -20,6 +25,11 @@ public class AhorcadoGUI extends BaseFrame {
     }
     
     
+
+    private DefaultTableModel modeloLetras;
+    private JTable tblLetras;
+    private int idxAdiv = 0;
+    private int idxErr = 0;
 
     @Override
     protected void initComponents() {
@@ -40,23 +50,44 @@ public class AhorcadoGUI extends BaseFrame {
         JLabel lblTitulo = crearLabel("Ahorcado", 0, 0, 0, 0, Font.BOLD, 32f);
         panelNorte.add(lblTitulo);
 
+        //tabla
+        modeloLetras = new DefaultTableModel(new Object[]{"Adivinadas", "Erradas"}, 0) {
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
+        };
+        tblLetras = new JTable(modeloLetras);
+        tblLetras.setRowHeight(24);
+        tblLetras.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        tblLetras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+
+        ((DefaultTableCellRenderer) tblLetras.getTableHeader().getDefaultRenderer())
+                .setHorizontalAlignment(CENTER);
+        DefaultTableCellRenderer center = new DefaultTableCellRenderer();
+        center.setHorizontalAlignment(CENTER);
+
+        JScrollPane spHistorial = new JScrollPane(tblLetras);
+        spHistorial.setBounds(520, 270, 360, 280);
+        panelCentro.add(spHistorial);
+
         JLabel lblIntentos = crearLabel("Intentos restantes: ", 50, 20, 230, 25, Font.BOLD, 22f);
         panelCentro.add(lblIntentos);
 
         JLabel lblIntentos2 = crearLabel("-", 280, 20, 230, 25, Font.BOLD, 22f);
         panelCentro.add(lblIntentos2);
 
-        JLabel lblPalabra = crearLabel("Prueba", 580, 220, 250, 85, Font.BOLD, 70f);
+        JLabel lblPalabra = crearLabel("Prueba", 580, 50, 250, 85, Font.BOLD, 70f);
         panelCentro.add(lblPalabra);
 
         JLabel lblTipo = crearLabel("Modo de juego: ", 540, 20, 230, 25, Font.BOLD, 18f);
         panelCentro.add(lblTipo);
 
-        JTextField txtCaracter = crearTextField(660, 350, 80, 45);
+        JTextField txtCaracter = crearTextField(660, 150, 80, 45);
         txtCaracter.setHorizontalAlignment(JTextField.CENTER);
         panelCentro.add(txtCaracter);
 
-        JButton btnAdivinar = crearBoton("Adivinar", 650, 410, 100, 40);
+        JButton btnAdivinar = crearBoton("Adivinar", 650, 210, 100, 40);
         panelCentro.add(btnAdivinar);
 
         String tipo[] = {"Base", "Azar"};
@@ -96,6 +127,10 @@ public class AhorcadoGUI extends BaseFrame {
         lblPalo.setBounds(65, 110, 500, 380);
         lblPalo.setIcon(new ImageIcon(getClass().getResource("/Imagenes/palo.png")));
         panelCentro.add(lblPalo);
+
+        btnSalir.addActionListener(e -> {
+            System.exit(0);
+        });
 
         setContentPane(panelPrincipal);
     }
