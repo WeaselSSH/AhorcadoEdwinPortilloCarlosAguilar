@@ -9,7 +9,9 @@ package ahorcadomain;
  * @author adrianaguilar
  */
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class AdminPalabrasSecretas {
@@ -18,40 +20,67 @@ public class AdminPalabrasSecretas {
 
     public AdminPalabrasSecretas() {
        
-        agregar("programacion");
-        agregar("java");
-        agregar("Erick");
-        agregar("teclado");
-        agregar("pantalla");
-        agregar("internet");
-        agregar("codigo");
-        agregar("unitec");
-        agregar("clase");
-        agregar("objeto");
+        addAll(Arrays.asList(
+            "programacion","java","erick","teclado","pantalla",
+            "internet","codigo","unitec","clase","objeto"
+        ));
     }
 
    
     public boolean agregar(String palabra) {
-        String p = palabra.toLowerCase();
-        if (indice.add(p)) {
-            palabras.add(p);
-            return true;
-        }
+        if (palabra == null) return false;
+        String p = palabra.trim().toLowerCase();
+        if (p.isEmpty()) return false;
+        if (indice.add(p)) { palabras.add(p); return true; }
         return false;
     }
 
-   
-    public String obtenerAleatoria() {
-        if (palabras.isEmpty()) {
-            throw new IllegalStateException("No hay palabras disponibles.");
-        }
-        int i = ThreadLocalRandom.current().nextInt(palabras.size());
-        return palabras.get(i);
+    
+    public int addAll(List<String> nuevas) {
+        int c = 0;
+        for (String s : nuevas) if (agregar(s)) c++;
+        return c;
     }
 
+    
+    public boolean eliminar(String palabra) {
+        if (palabra == null) return false;
+        String p = palabra.trim().toLowerCase();
+        if (indice.remove(p)) { palabras.remove(p); return true; }
+        return false;
+    }
+
+    
+    public boolean eliminarIndex(int idx) {
+        if (idx < 0 || idx >= palabras.size()) return false;
+        String p = palabras.remove(idx);
+        indice.remove(p);
+        return true;
+    }
+
+    /** Limpia todas. */
+    public void limpiar() {
+        palabras.clear();
+        indice.clear();
+    }
+
+ 
+    public void reemplazarTodo(List<String> nuevas) {
+        limpiar();
+        addAll(nuevas);
+    }
+
+    
+    public ArrayList<String> listar() {
+        return new ArrayList<>(palabras);
+    }
+
+   
     public int size() { return palabras.size(); }
 
-    public ArrayList<String> todas() {
-        return new ArrayList<>(palabras);
+    public String obtenerAleatoria() {
+        if (palabras.isEmpty()) throw new IllegalStateException("No hay palabras disponibles.");
+        int i = ThreadLocalRandom.current().nextInt(palabras.size());
+        return palabras.get(i);
     }
 }

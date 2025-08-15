@@ -18,6 +18,8 @@ public class AhorcadoGUI extends BaseFrame {
     public AhorcadoGUI() {
         super("Ahorcado", 940, 760);
     }
+    
+    
 
     @Override
     protected void initComponents() {
