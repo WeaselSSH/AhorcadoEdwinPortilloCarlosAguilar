@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class AhorcadoGUI extends BaseFrame {
 
@@ -48,7 +49,13 @@ public class AhorcadoGUI extends BaseFrame {
 
         JLabel lblTipo = crearLabel("Modo de juego: ", 540, 20, 230, 25, Font.BOLD, 18f);
         panelCentro.add(lblTipo);
-       
+        
+        JTextField txtCaracter = crearTextField(420, 420, 80, 45);
+        txtCaracter.setHorizontalAlignment(JTextField.CENTER);
+        panelCentro.add(txtCaracter);
+        
+        JButton btnAdivinar = crearBoton("Adivinar", 410, 490, 100, 40);
+        panelCentro.add(btnAdivinar);
 
         String tipo[] = {"Base", "Azar"};
         JComboBox<String> cboTipo = new JComboBox(tipo);
